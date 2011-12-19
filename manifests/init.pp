@@ -1,27 +1,19 @@
 class drush {
 
-  include drush::preferences
-
   package { 'drush':
     ensure  => latest,
     require => [
-      Class['drush::preferences'],
+      File['/etc/apt/preferences.d/drush.pref'],
+      Class["apt::backports"],
+      Exec['update_apt'],
     ],
   }
 
-}
-
-class drush::preferences {
-
-  apt::sources {'drush.list':
-    dir  => '/tmp/vagrant-puppet/modules-0/drush/files',
-    name => 'drush',
-  }
-
-
+  include apt::backports
   file {'/etc/apt/preferences.d/drush.pref':
     ensure => present,
-    source => "/tmp/vagrant-puppet/modules-0/drush/files/drush.pref",
+    source => "puppet:///drush/drush.pref",
+    notify => Exec['update_apt'];
   }
 
 }
