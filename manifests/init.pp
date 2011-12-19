@@ -1,7 +1,7 @@
 class drush {
 
   package { 'drush':
-    ensure  => latest,
+    ensure  => present,
     require => [
       File['/etc/apt/preferences.d/drush.pref'],
       Class["apt::backports"],
