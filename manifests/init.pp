@@ -12,7 +12,7 @@ class drush {
   include apt::backports
   file {'/etc/apt/preferences.d/drush.pref':
     ensure => present,
-    source => "puppet:///drush/drush.pref",
+    source => "puppet:///modules/drush/drush.pref",
     notify => Exec['update_apt'];
   }
 
