@@ -1,12 +1,12 @@
-define drush::dl ($site_alias = "", $cwd = "/var/aegir") {
+define drush::dl ($site_path, $site_alias = "", $log = undef) {
+  include drush
+
+  if $log { $log_output = " >> ${log} 2>&1" }
 
   exec {"drush-dl-${name}":
-    path        => '/usr/bin:/bin',
-    user        => 'aegir',
-    group       => 'aegir',
-    command     => "drush ${site_alias} dl ${name} -y  >> /var/aegir/drush.log 2>&1",
-    environment => "HOME=/var/aegir",
-    cwd         => $cwd,
+    command => "drush ${site_alias} dl ${name} -y ${log_output}",
+    cwd     => $site_path,
+    creates => "${site_path}/modules/${name}/",
   }
                           
 }
