@@ -8,5 +8,10 @@ define drush::dl ($site_path, $site_alias = "", $log = undef) {
     cwd     => $site_path,
     creates => "${site_path}/modules/${name}/",
   }
-                          
+
+  if defined(Exec["drush-en-${name}"]) {
+    Exec["drush-dl-${name}"] {
+      before  => Exec["drush-en-${name}"],
+    }
+  }
 }

@@ -7,7 +7,6 @@ define drush::en ($site_path, $site_alias = "", $log = undef) {
     command     => "drush ${site_alias} en ${name} -y ${log_output}",
     cwd         => $site_path,
     refreshonly => true,
-    require     => Exec["drush-dl-${name}"],
   }
                           
 }
