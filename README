@@ -27,18 +27,18 @@ To use this module, follow these directions:
 
 2. Since Debian package installations depends on the Apt module, which in turn
    depends on some functions provided by the Common module, you'll need to add
-   the following line in your manifests (ideally to manifests/modules.pp):
+   the following line in your manifests (ideally to manifests/site.pp):
 
        import "common"
 
-3. To install Drush, add the following line to your manifests (ideally in 
-   manifests/site.pp):
-   
-       include aegir
+3. To install Drush, add the following line to your manifests (ideally in
+   manifests/nodes.pp):
+
+       include drush
 
 4. To download projects from drupal.org to a site, add lines such as the
    following to your manifests (ideally in manifests/site.pp):
- 
+
        drush::dl {'token':
          site_path => '/var/aegir/platforms/drupal/sites/example.com',
          log       => '/var/aegir/drush.log',
