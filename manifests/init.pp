@@ -18,7 +18,7 @@ class drush {
     }
   }
   else {
-    if !$drush_git_branch {$drush_git_branch = 'master'}
+    if !$drush_git_branch {$drush_git_branch = '8.x-6.x'}
     if !$drush_git_tag {$drush_git_tag_string = ''}
     else {$drush_git_tag_string = "&& cd drush && git checkout $drush_git_tag"}
     exec {'clone drush':
