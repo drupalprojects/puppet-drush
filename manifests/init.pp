@@ -24,6 +24,7 @@ class drush {
     exec {'clone drush':
       command => "/usr/bin/git clone --recursive --branch ${drush_git_branch} http://git.drupal.org/project/drush.git ${drush_git_tag_string}" ,
       cwd     => '/usr/share/',
+      creates => '/usr/share/drush/',
     }
     file {'symlink drush':
       ensure => link,
