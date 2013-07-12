@@ -22,7 +22,7 @@ class drush {
     if !$drush_git_tag {$drush_git_tag_string = ''}
     else {$drush_git_tag_string = "&& cd drush && git checkout $drush_git_tag"}
     exec {'clone drush':
-      command => "/usr/bin/git clone --recursive --branch ${drush_git_branch} http://git.drupal.org/project/drush.git ${drush_git_tag_string}" ,
+      command => "/usr/bin/git clone --branch ${drush_git_branch} http://git.drupal.org/project/drush.git ${drush_git_tag_string}" ,
       cwd     => '/usr/share/',
       creates => '/usr/share/drush/',
     }
