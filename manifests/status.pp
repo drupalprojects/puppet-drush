@@ -1,11 +1,22 @@
-class drush::status ($site_alias) {
+define drush::status (
+  $site_alias = $drush::defaults::site_alias,
+  $options    = $drush::defaults::options,
+  $arguments  = $drush::defaults::arguments,
+  $site_path  = $drush::defaults::site_path,
+  $drush_user = $drush::defaults::drush_user,
+  $drush_home = $drush::defaults::drush_home,
+  $log_path   = $drush::defaults::log_path,
+  ) { 
 
-  exec {"drush-status-${site_alias}":
-    path        => '/usr/bin',
-    user        => 'aegir',
-    group       => 'aegir',
-    command     => "drush @${site_alias} status > /var/aegir/drush_status.txt",
-    environment => "HOME=/var/aegir",
+  drush::run {"drush-status:${name}":
+    command    => 'core-status',
+    site_alias => $site_alias,
+    options    => $options,
+    arguments  => $arguments,
+    site_path  => $site_path,
+    drush_user => $drush_user,
+    drush_home => $drush_home,
+    log_path   => $log_path,
   }
 
 }

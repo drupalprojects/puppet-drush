@@ -1,12 +1,25 @@
-define drush::dis ($site_alias = "", $cwd = "/var/aegir") {
+define drush::dis (
+  $site_alias = $drush::defaults::site_alias,
+  $options    = $drush::defaults::options,
+  $arguments  = $drush::defaults::arguments,
+  $site_path  = $drush::defaults::site_path,
+  $drush_user = $drush::defaults::drush_user,
+  $drush_home = $drush::defaults::drush_home,
+  $log        = $drush::defaults::log,
+  ) {
 
-  exec {"drush-dis-${name}":
-    path        => '/usr/bin:/bin',
-    user        => 'aegir',
-    group       => 'aegir',
-    command     => "drush ${site_alias} dis ${name} -y >> /var/aegir/drush.log 2>&1",
-    environment => "HOME=/var/aegir",
-    cwd         => $cwd,
+  if $arguments { $real_args = $arguments }
+  else { $real_args = $name }
+
+  drush::run {"drush-dis:${name}":
+    command    => 'pm-disable',
+    site_alias => $site_alias,
+    options    => $options,
+    arguments  => $real_args,
+    site_path  => $site_path,
+    drush_user => $drush_user,
+    drush_home => $drush_home,
+    log        => $log,
   }
-                          
+
 }

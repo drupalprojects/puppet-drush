@@ -1,41 +1,22 @@
-class drush {
+class drush (
+  $drush_api = $drush::defaults::drush_api,
+  $drush_apt = $drush::defaults::drush_apt,
+  $dist      = $drush::defaults::dist,
+  $ensure    = $drush::defaults::ensure
+  ) inherits drush::defaults {
 
-  if !$drush_dev_build {
-    package { 'drush':
-      ensure  => present,
-      require => [
-        File['/etc/apt/preferences.d/drush.pref'],
-        Class["apt::backports"],
-        Exec['update_apt'],
-      ],
-    }
-
-    include apt::backports
-    file {'/etc/apt/preferences.d/drush.pref':
-      ensure => present,
-      source => "puppet:///modules/drush/drush.pref",
-      notify => Exec['update_apt'];
-    }
+  package { 'drush':
+    ensure  => $ensure,
   }
-  else {
-    if !$drush_git_branch {$drush_git_branch = 'master'}
-    if !$drush_git_tag {$drush_git_tag_string = ''}
-    else {$drush_git_tag_string = "&& cd drush && git checkout $drush_git_tag"}
-    exec {'clone drush':
-      command => "/usr/bin/git clone --recursive --branch ${drush_git_branch} http://git.drupal.org/project/drush.git ${drush_git_tag_string}" ,
-      cwd     => '/usr/share/',
-    }
-    file {'symlink drush':
-      ensure => link,
-      path   => '/usr/bin/drush',
-      target => '/usr/share/drush/drush.php',
-      require => Exec['clone drush'],
-    }
-    exec {'run drush':
-    # Needed to download a Pear library
-      command => '/usr/bin/drush status',
-      require => File['symlink drush'],
+  if $drush_apt {
+    Package['drush'] { require => Class['drush::apt'] }
+    class {'drush::apt':
+      dist => $dist,
     }
   }
 
+  if $drush_api == 4 {
+    Class['drush::apt'] { backports => 'squeeze' }
+  }
 }
+
