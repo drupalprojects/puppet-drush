@@ -14,8 +14,8 @@ class drush::defaults {
   $creates    = false
   $paths      = [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ]
 
-  if defined(Class['drush::git']) {
-    $installed = Class['drush::git']
+  if defined(Class['drush::git::drush']) {
+    $installed = Class['drush::git::drush']
   }
   else {
     $installed = Class['drush']
