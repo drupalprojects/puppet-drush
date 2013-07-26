@@ -2,7 +2,7 @@ class drush::git::drush (
   $git_branch = '',
   $git_tag    = '',
   $git_repo   = 'http://git.drupal.org/project/drush.git',
-  $update     = false,
+  $update     = false
   ) {
 
   drush::git { $git_repo :

@@ -56,13 +56,13 @@ To use this module, follow these directions:
         (also called 'installed'), 'absent', 'purged', 'held', of 'latest'. 
         Values can match /./.
 
-2a. To install Drush from source, add these entries to your manifests:
+2a. To install Drush from source, add one of these entries to your manifests:
 
-       include drush::git
+       include drush::git:drush
 
    or
 
-       class {'drush::git':
+       class {'drush::git:drush':
          git_branch => '8.x-6.x',
          update     => true,
        }
@@ -75,7 +75,6 @@ To use this module, follow these directions:
     git_url: The git URL from which to clone the repository.
     update: Whether to update to the latest code with each Puppet run.
         Defaults to false.
-    paths: Alternate paths to your git binary.
 
 
 USAGE
@@ -132,7 +131,7 @@ USAGE
     site_alias, options, arguments, site_path, drush_user, drush_home, log: All
         operate the same as for drush::run.
 
-4. To display the status of a site in you Puppet log, add lines such as the
+4. To display the status of a site in your Puppet log, add lines such as the
    following to your manifests:
 
        drush::dis {'@prod status':
@@ -164,6 +163,27 @@ USAGE
         drush::run.
 
 
+6. The module also provides a simple way to clone git repos and keep them up-
+   to-date:
+
+       drush::git { 'git://git.drupal.org:project/provision':
+         path => '/var/aegir/.drush',
+       }
+ 
+  There is one required parameter:
+
+    path: Where to clone the git repo.
+
+  The following parameters are all optional:
+
+    git_branch: The git branch to checkout. 
+    git_tag: The git tag to check out. Overrides 'branch' if also specified.
+    git_repo: The git repository to clone. Defaults to the resource name.
+    dir_name: The name of the directory in which to clone the git repo.
+    update: Run 'git pull' in this repo on every Puppet run.
+    paths: Alternative search paths for your git binary.
+
+
 DEVELOPING
 ----------
 
@@ -181,6 +201,13 @@ found at:
 Along similar lines, Skynet takes this way too far:
 
     https://drupal.org/project/skynet
+
+The drush::git resource is a minimalist general-purpose function to allow
+cloning and updating git repositories. It is not intended to be a full-featured
+git class/resource. It will not attempt to install git for you either, but this
+should be sufficient:
+
+    package {'git':}
 
 This Puppet module is published under the GNU GPLv2 (General Public License,
 Version 2), and as such is, and will always remain, Free Software. Engagement
