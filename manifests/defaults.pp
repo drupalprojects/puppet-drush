@@ -2,9 +2,9 @@ class drush::defaults {
 
   $drush_user = 'root'
   $drush_home = '/root'
-  $site_alias = false
-  $options    = false
-  $arguments  = false
+  $site_alias = ''
+  $options    = ''
+  $arguments  = ''
   $drush_api  = 5
   $drush_apt  = true
   $dist       = 'stable'
