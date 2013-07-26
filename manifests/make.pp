@@ -10,12 +10,11 @@ define drush::make (
 
   if $make_path { $real_make_path = $make_path }
   else { $real_make_path = $name }
-    $arguments = "${makefile} ${real_make_path}"
-  }
+  $arguments = "${makefile} ${real_make_path}"
 
   drush::run {"drush-make:${name}":
     command    => 'make',
-    creates    => $make_path
+    creates    => $make_path,
     options    => $options,
     arguments  => $arguments,
     drush_user => $drush_user,

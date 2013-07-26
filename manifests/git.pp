@@ -20,7 +20,7 @@ define drush::git (
   else {
     # Figure out the name of the cloned into directory from the git repo.
     $repo_array = split($real_git_repo, '[/]')
-    $real_dir   = regsubt($repo_array[-1], '\.git$', '')
+    $real_dir   = regsubst($repo_array[-1], '\.git$', '')
     $real_path  = "${path}/${real_dir}"
   }
 
@@ -28,7 +28,7 @@ define drush::git (
     command => "git clone ${real_git_repo} ${real_dir}",
     creates => $real_path,
     cwd     => $path,
-    paths   => $paths,
+    path    => $paths,
   }
 
   # The specific (tag) overrides the general (branch).

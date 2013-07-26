@@ -3,7 +3,7 @@ class drush::git::drush (
   $git_tag    = '',
   $git_repo   = 'http://git.drupal.org/project/drush.git',
   $update     = false
-  ) {
+  ) inherits drush::defaults {
 
   drush::git { $git_repo :
     path       => '/usr/share/php/',

@@ -5,7 +5,7 @@ define drush::status (
   $site_path  = $drush::defaults::site_path,
   $drush_user = $drush::defaults::drush_user,
   $drush_home = $drush::defaults::drush_home,
-  $log_path   = $drush::defaults::log_path,
+  $log        = $drush::defaults::log,
   ) {
 
   drush::run {"drush-status:${name}":
@@ -16,7 +16,7 @@ define drush::status (
     site_path  => $site_path,
     drush_user => $drush_user,
     drush_home => $drush_home,
-    log_path   => $log_path,
+    log        => $log,
   }
 
 }
