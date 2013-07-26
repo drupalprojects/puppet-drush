@@ -25,7 +25,7 @@ define drush::dl (
 
   if $site_path {
     Drush::Run["drush-dl:${name}"] { creates => "${site_path}/${type}s/${name}"}
-  } 
+  }
 
   if defined(Drush::Run["drush-en:${name}"]) {
     Drush::Run["drush-dl:${name}"] {

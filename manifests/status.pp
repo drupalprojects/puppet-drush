@@ -6,7 +6,7 @@ define drush::status (
   $drush_user = $drush::defaults::drush_user,
   $drush_home = $drush::defaults::drush_home,
   $log_path   = $drush::defaults::log_path,
-  ) { 
+  ) {
 
   drush::run {"drush-status:${name}":
     command    => 'core-status',

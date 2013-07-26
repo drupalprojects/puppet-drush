@@ -14,7 +14,7 @@ define drush::run (
   $onlyif      = false,
   $refreshonly = false
   ) {
- 
+
   if $log { $log_output = " >> ${log} 2>&1" }
 
   if $command { $real_command = $command }
@@ -44,7 +44,7 @@ define drush::run (
   if $onlyif {
     Exec["drush-run:${real_command}:${name}"] { onlyif => $onlyif }
   }
- 
+
   if $refreshonly {
     Exec["drush-run:${real_command}:${name}"] { refreshonly => $refreshonly }
   }

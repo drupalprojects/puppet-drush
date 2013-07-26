@@ -1,6 +1,6 @@
 define drush::make (
   $makefile,
-  $make_path  = false
+  $make_path  = false,
   $options    = $drush::defaults::options,
   $site_path  = $drush::defaults::site_path,
   $drush_user = $drush::defaults::drush_user,
@@ -8,8 +8,8 @@ define drush::make (
   $log        = $drush::defaults::log,
   ) {
 
-  if $makefile { $real_makefile = $makefile }
-  else { $real_makefile = $name }
+  if $make_path { $real_make_path = $make_path }
+  else { $real_make_path = $name }
     $arguments = "${makefile} ${real_make_path}"
   }
 

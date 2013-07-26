@@ -34,8 +34,8 @@ define drush::git (
   # The specific (tag) overrides the general (branch).
   if $git_tag { $git_ref = $git_tag }
   else        { $git_ref = $git_branch }
-  
-  if $git_ref { 
+
+  if $git_ref {
     exec {'drush_checkout_ref':
       command => "git checkout ${git_ref}",
       cwd     => $real_path,

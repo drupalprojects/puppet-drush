@@ -7,7 +7,7 @@ class drush::apt ( $dist = 'stable', $backports = false) {
       ensure  => 'present',
       path    => "/etc/apt/preferences.d/drush-${backports}.pref",
       content => "Package: drush\nPin: release a=${backports}-backports\nPin-Priority: 1001\n",
-      owner   => root, group => root, mode => 0644,
+      owner   => root, group => root, mode => '0644',
       notify  => Exec['drush_update_apt'],
     }
   }
@@ -20,20 +20,20 @@ class drush::apt ( $dist = 'stable', $backports = false) {
     ensure  => 'present',
     path    => $path,
     content => $content,
-    owner   => root, group => root, mode => 0644,
+    owner   => root, group => root, mode => '0644',
     notify  => Exec['drush_update_apt'],
   }
 
   exec { 'drush_update_apt':
     command     => 'apt-get update',
-    path        => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ],
+    path        => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ],
     refreshonly => true,
     subscribe   => File['drush_apt_sources'],
   }
 
   exec { 'drush_apt_update':
     command  => 'apt-get update && /usr/bin/apt-get autoclean',
-    path     => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ],
+    path     => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ],
     require  => File['drush_apt_sources'],
     schedule => daily,
   }
