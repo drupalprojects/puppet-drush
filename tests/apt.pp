@@ -1,4 +1,4 @@
-class { 'drush::apt' :
+class { 'drush::apt' : 
   dist      => 'squeeze',
   backports => 'squeeze',
 }
