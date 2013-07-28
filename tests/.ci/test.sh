@@ -8,6 +8,7 @@ then
 else
   echo "ERROR: The test script expects the name of the module to be in a file"
   echo "       called '.module', in the same directory as the test script."
+  echo $SCRIPT_DIR
   exit 1
 fi
 cd $SCRIPT_DIR
@@ -18,6 +19,7 @@ then
 else
   echo "ERROR: The test script expects to be in <module_dir>/tests/.ci/, but"
   echo "       cannot find the module's 'init.pp', from its current location."
+  echo $SCRIPT_DIR
   exit 1
 fi
 rm -rf /tmp/$MODULE
