@@ -6,6 +6,6 @@ Vagrant::Config.run do |config|
   config.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/debian-607-x64-vbox4210.box"
 
   config.vm.provision :shell,
-    :path => "test.sh"
+    :path => "./tests/.ci/vagrant_test.sh"
 
 end
