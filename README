@@ -110,6 +110,7 @@ USAGE
   The following parameters are all optional:
 
     type: The type of package to download. Defaults to 'module'.
+    version: The version of the package to download.
     site_path: Operates the same as for drush::run. Set this parameter to avoid
         having a package downloaded repeatedly, as it will allow Puppet to see
         whether it already exists. Alternatively, do not set this parameter to

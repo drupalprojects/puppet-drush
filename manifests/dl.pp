@@ -1,5 +1,6 @@
 define drush::dl (
   $type       = 'module',
+  $version    = '',
   $site_alias = $drush::defaults::site_alias,
   $options    = $drush::defaults::options,
   $arguments  = $drush::defaults::arguments,
@@ -9,8 +10,10 @@ define drush::dl (
   $log        = $drush::defaults::log
   ) {
 
+  if $version { $real_ver = "-${version}"}
+
   if $arguments { $real_args = $arguments }
-  else { $real_args = $name }
+  else { $real_args = "${name}${real_ver}" }
 
   drush::run {"drush-dl:${name}":
     command    => 'pm-download',
@@ -29,7 +32,7 @@ define drush::dl (
 
   if defined(Drush::Run["drush-en:${name}"]) {
     Drush::Run["drush-dl:${name}"] {
-      before  +> Exec["drush-en:${name}"],
+      before +> Exec["drush-en:${name}"],
     }
   }
 }
