@@ -5,7 +5,7 @@ define drush::dis (
   $site_path  = $drush::defaults::site_path,
   $drush_user = $drush::defaults::drush_user,
   $drush_home = $drush::defaults::drush_home,
-  $log        = $drush::defaults::log,
+  $log        = $drush::defaults::log
   ) {
 
   if $arguments { $real_args = $arguments }
