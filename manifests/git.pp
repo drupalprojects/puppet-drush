@@ -46,7 +46,7 @@ define drush::git (
 
   if $update {
     exec {'drush_update_repo':
-      command => 'git pull',
+      command => 'git pull -r',
       cwd     => $real_path,
       paths   => $paths,
       require => Exec['drush_clone_repo'],

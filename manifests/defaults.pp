@@ -5,8 +5,8 @@ class drush::defaults {
   $site_alias = ''
   $options    = ''
   $arguments  = ''
-  $drush_api  = 5
-  $drush_apt  = true
+  $api        = 5
+  $apt        = true
   $dist       = 'stable'
   $ensure     = 'present'
   $site_path  = false

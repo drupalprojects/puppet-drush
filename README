@@ -20,9 +20,9 @@ REQUIREMENTS
 
 The Drush Puppet module is designed to work on Debian GNU/Linux systems and
 derivatives. It provides rudimentary support for apt-get, which can be
-disabled by setting the 'drush_apt' parameter to 'false' on the 'drush' class.
-As such, it should work with other *nix systems, assuming Drush is available
-for install in the OS's packaging, or Drush is installed from source using
+disabled by setting the 'apt' parameter to 'false' on the 'drush' class. As
+such, it should work with other *nix systems, assuming Drush is available for
+install in the OS's packaging system, or Drush is installed from source using
 the provided 'drush::git' class.
 
 
@@ -47,9 +47,8 @@ To use this module, follow these directions:
 
   The following parameters are available:
 
-    drush_api: The major version of Drush to install. Currently supports '4',
-        or '5'.
-    drush_apt: Whether to install via apt-get. Defaults to 'true'.
+    api: The major version of Drush to install. Currently supports '4' or '5'.
+    apt: Whether to install via apt-get. Defaults to 'true'.
     dist: The Debian distribution from which to install via apr-get. Defaults
         to 'stable'.
     ensure: What state the package should be in. Valid values are 'present'
@@ -183,7 +182,7 @@ USAGE
     git_tag: The git tag to check out. Overrides 'branch' if also specified.
     git_repo: The git repository to clone. Defaults to the resource name.
     dir_name: The name of the directory in which to clone the git repo.
-    update: Run 'git pull' in this repo on every Puppet run.
+    update: Run 'git pull -r' in this repo on every Puppet run.
     paths: Alternative search paths for your git binary.
 
 
