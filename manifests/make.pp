@@ -20,6 +20,7 @@ define drush::make (
     drush_user => $drush_user,
     drush_home => $drush_home,
     log        => $log,
+    timeout    => 0,
   }
 
 }

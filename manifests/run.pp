@@ -10,6 +10,7 @@ define drush::run (
   $installed   = $drush::defaults::installed,
   $creates     = $drush::defaults::creates,
   $paths       = $drush::defaults::paths,
+  $timeout     = false,
   $unless      = false,
   $onlyif      = false,
   $refreshonly = false
@@ -35,6 +36,10 @@ define drush::run (
 
   if $creates {
     Exec["drush-run:${real_command}:${name}"] { creates => $creates }
+  }
+
+  if $timeout {
+    Exec["drush-run:${real_command}:${name}"] { timeout => $timeout }
   }
 
   if $unless {

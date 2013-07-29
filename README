@@ -97,6 +97,8 @@ USAGE
     creates, unless, onlyif, refreshonly: Control whether the command is
         executed at each Puppet run. Identical to these paramaters on the
         built-in 'exec' resource.
+    timeout: The maximum time the command should take, specified in seconds.
+        Defaults to 300 seconds. Disable the timeout by setting to 0.
     paths: provide alternative paths to search for your Drush executable.
 
 2. To download projects from drupal.org to a site, add lines such as the

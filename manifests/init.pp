@@ -5,6 +5,8 @@ class drush (
   $ensure    = $drush::defaults::ensure
   ) inherits drush::defaults {
 
+  include drush::defaults
+
   package { 'drush':
     ensure  => $ensure,
   }
