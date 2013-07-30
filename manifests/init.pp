@@ -12,12 +12,15 @@ class drush (
   }
 
   if $apt {
+
     Package['drush'] { require => Class['drush::apt'] }
+
+    if $api == 4 { $backports = 'squeeze' }
+    else { $backports = '' }
+   
     class {'drush::apt':
       dist => $dist,
-    }
-    if $api == 4 {
-      Class['drush::apt'] { backports => 'squeeze' }
+      backports => $backports,
     }
   }
 }
