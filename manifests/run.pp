@@ -21,7 +21,7 @@ define drush::run (
   if $command { $real_command = $command }
   else { $real_command = $name}
 
-  exec {"drush-run:${real_command}:${name}":
+  exec {"drush-run:${name}":
     command     => "drush ${site_alias} --yes ${options} ${real_command} ${arguments} ${log_output}",
     user        => $drush_user,
     group       => $drush_user,
@@ -31,27 +31,27 @@ define drush::run (
   }
 
   if $site_path {
-    Exec["drush-run:${real_command}:${name}"] { cwd => $site_path }
+    Exec["drush-run:${name}"] { cwd => $site_path }
   }
 
   if $creates {
-    Exec["drush-run:${real_command}:${name}"] { creates => $creates }
+    Exec["drush-run:${name}"] { creates => $creates }
   }
 
   if $timeout {
-    Exec["drush-run:${real_command}:${name}"] { timeout => $timeout }
+    Exec["drush-run:${name}"] { timeout => $timeout }
   }
 
   if $unless {
-    Exec["drush-run:${real_command}:${name}"] { unless => $unless }
+    Exec["drush-run:${name}"] { unless => $unless }
   }
 
   if $onlyif {
-    Exec["drush-run:${real_command}:${name}"] { onlyif => $onlyif }
+    Exec["drush-run:${name}"] { onlyif => $onlyif }
   }
 
   if $refreshonly {
-    Exec["drush-run:${real_command}:${name}"] { refreshonly => $refreshonly }
+    Exec["drush-run:${name}"] { refreshonly => $refreshonly }
   }
 
 }
