@@ -57,11 +57,11 @@ To use this module, follow these directions:
 
 2a. To install Drush from source, add one of these entries to your manifests:
 
-       include drush::git:drush
+       include drush::git::drush
 
    or
 
-       class {'drush::git:drush':
+       class {'drush::git::drush':
          git_branch => '8.x-6.x',
          update     => true,
        }
