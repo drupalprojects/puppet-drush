@@ -26,7 +26,7 @@ class drush::apt ( $dist = 'stable', $backports = false) {
 
   file { "/etc/apt/sources.list.d/drush-${dist}.list" :
     ensure  => 'present',
-    content => "deb http://http.debian.net/debian ${dist} main",
+    content => "deb http://ftp.debian.org/debian ${dist} main",
     owner   => root, group => root, mode => '0644',
     notify  => Exec['drush_update_apt'],
   }
