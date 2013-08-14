@@ -36,7 +36,7 @@ To use this module, follow these directions:
 
 2. To install Drush, add one of these entries to your manifests (such as in
    manifests/nodes.pp):
-   
+
        include drush
 
    or
@@ -48,13 +48,11 @@ To use this module, follow these directions:
   The following parameters are available:
 
     api: The major version of Drush to install. Currently supports '4' or '5'.
-    apt: Whether to add custom sources for install via apt-get. Defaults to
-        'true'.
     dist: The Debian distribution from which to install via apt-get. Defaults
-        to 'stable'.
+        to 'stable'. Set to false to suppres adding custom sources for install
+        via apt-get.
     ensure: What state the package should be in. Valid values are 'present'
-        (also called 'installed'), 'absent', 'purged', 'held', of 'latest'. 
-        Values can match /./.
+        (also called 'installed'), 'absent', 'purged', 'held', of 'latest'.
 
 2a. To install Drush from source, add one of these entries to your manifests:
 
@@ -156,7 +154,7 @@ USAGE
 
   There is one required parameter:
 
-    makefile: The path to the makefile to use in building the code-base.    
+    makefile: The path to the makefile to use in building the code-base.
 
   The following parameters are all optional:
 
