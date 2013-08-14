@@ -19,11 +19,11 @@ REQUIREMENTS
 ------------
 
 The Drush Puppet module is designed to work on Debian GNU/Linux systems and
-derivatives. It provides rudimentary support for apt-get, which can be
-disabled by setting the 'apt' parameter to 'false' on the 'drush' class. As
-such, it should work with other *nix systems, assuming Drush is available for
-install in the OS's packaging system, or Drush is installed from source using
-the provided 'drush::git' class.
+derivatives. It provides rudimentary support for apt-get, but defaults to
+letting the OS's default packaging system handle installation. As such, it
+should work with other *nix systems, assuming Drush is available for install
+in the OS's packaging system, or Drush is installed from source using the
+provided 'drush::git' class.
 
 
 INSTALLATION
@@ -101,7 +101,7 @@ USAGE
 
 2. To download projects from drupal.org to a site, add lines such as the
    following to your manifests:
- 
+
        drush::dl {'token':
          site_path => '/var/aegir/platforms/drupal/sites/example.com',
          log       => '/var/aegir/drush.log',
@@ -170,7 +170,7 @@ USAGE
        drush::git { 'git://git.drupal.org:project/provision':
          path => '/var/aegir/.drush',
        }
- 
+
   There is one required parameter:
 
     path: Where to clone the git repo.
