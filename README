@@ -48,8 +48,9 @@ To use this module, follow these directions:
   The following parameters are available:
 
     api: The major version of Drush to install. Currently supports '4' or '5'.
-    apt: Whether to install via apt-get. Defaults to 'true'.
-    dist: The Debian distribution from which to install via apr-get. Defaults
+    apt: Whether to add custom sources for install via apt-get. Defaults to
+        'true'.
+    dist: The Debian distribution from which to install via apt-get. Defaults
         to 'stable'.
     ensure: What state the package should be in. Valid values are 'present'
         (also called 'installed'), 'absent', 'purged', 'held', of 'latest'. 
