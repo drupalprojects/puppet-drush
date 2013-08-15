@@ -6,7 +6,7 @@ class drush::git::drush (
   ) inherits drush::defaults {
 
   drush::git { $git_repo :
-    path       => '/usr/share/php/',
+    path       => '/usr/share',
     git_branch => $git_branch,
     git_tag    => $git_tag,
     update     => $update,
@@ -15,7 +15,7 @@ class drush::git::drush (
   file {'symlink drush':
     ensure  => link,
     path    => '/usr/bin/drush',
-    target  => '/usr/share/php/drush/drush.sh',
+    target  => '/usr/share/drush/drush',
     require => Drush::Git[$git_repo],
     notify  => Exec['first drush run'],
   }

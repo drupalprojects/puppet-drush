@@ -30,6 +30,7 @@ define drush::git (
     creates => $real_path,
     cwd     => $path,
     path    => $paths,
+    timeout => 0,
   }
 
   # The specific (tag) overrides the general (branch).
