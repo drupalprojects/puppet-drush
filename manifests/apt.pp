@@ -1,4 +1,4 @@
-class drush::apt ( $dist = 'stable', $backports = false) {
+class drush::apt ( $dist = false, $backports = false) {
 
   if $backports {
     file { "/etc/apt/preferences.d/drush-${backports}.pref":
@@ -24,11 +24,14 @@ class drush::apt ( $dist = 'stable', $backports = false) {
     }
   }
 
-  file { "/etc/apt/sources.list.d/drush-${dist}.list" :
-    ensure  => 'present',
-    content => "deb http://ftp.debian.org/debian ${dist} main",
-    owner   => root, group => root, mode => '0644',
-    notify  => Exec['drush_update_apt'],
+  if $dist {
+    file { "/etc/apt/sources.list.d/drush-${dist}.list" :
+      ensure  => 'present',
+      content => "deb http://ftp.debian.org/debian ${dist} main",
+      owner   => root, group => root, mode => '0644',
+      notify  => Exec['drush_update_apt'],
+      before  => Exec['drush_apt_update'],
+    }
   }
 
   exec { 'drush_update_apt':
@@ -40,7 +43,6 @@ class drush::apt ( $dist = 'stable', $backports = false) {
   exec { 'drush_apt_update':
     command  => 'apt-get update && /usr/bin/apt-get autoclean',
     path     => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ],
-    require  => File["/etc/apt/sources.list.d/drush-${dist}.list"],
     schedule => daily,
   }
 
