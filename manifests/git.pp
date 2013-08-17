@@ -5,7 +5,8 @@ define drush::git (
   $git_repo   = false,
   $dir_name   = false,
   $update     = false,
-  $paths      = $drush::defaults::paths
+  $paths      = $drush::defaults::paths,
+  $user       = 'root',
   ) {
 
   # Default to the resource name if no explicit git repo is provided.
@@ -29,6 +30,7 @@ define drush::git (
     command => "git clone ${real_git_repo} ${real_dir}",
     creates => $real_path,
     cwd     => $path,
+    user    => $user,
     path    => $paths,
     timeout => 0,
   }
