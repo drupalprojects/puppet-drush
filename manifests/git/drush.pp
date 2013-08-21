@@ -1,7 +1,7 @@
 class drush::git::drush (
   $git_branch = '',
   $git_tag    = '',
-  $git_repo   = 'http://git.drupal.org/project/drush.git',
+  $git_repo   = 'https://github.com/drush-ops/drush.git',
   $update     = false
   ) inherits drush::defaults {
 
