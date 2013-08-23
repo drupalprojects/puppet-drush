@@ -24,6 +24,7 @@ define drush::dl (
     drush_user => $drush_user,
     drush_home => $drush_home,
     log        => $log,
+    unless     => "drush ${site_alias} pm-list | grep ${name}",
   }
 
   if $site_path {

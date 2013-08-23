@@ -22,6 +22,7 @@ define drush::en (
     drush_home  => $drush_home,
     refreshonly => $refreshonly,
     log         => $log,
+    unless      => "drush ${site_alias} pm-list --status=enabled | grep ${name}",
   }
 
 }
