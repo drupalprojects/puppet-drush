@@ -24,7 +24,20 @@ define drush::dl (
     drush_user => $drush_user,
     drush_home => $drush_home,
     log        => $log,
-    unless     => "drush ${site_alias} pm-list | grep ${name}",
+  }
+
+  # Add an 'unless' argument depending on the project type.
+  case $type {
+    'module', 'theme': {
+      Drush::Run["drush-dl:${name}"] {
+        unless => "drush ${site_alias} pm-list | grep ${name}",
+      }
+    }
+    'extension': {
+      Drush::Run["drush-dl:${name}"] {
+        unless => "[ -d '${drush_home}/.drush/${name}' ]",
+      }
+    }
   }
 
   if $site_path {
