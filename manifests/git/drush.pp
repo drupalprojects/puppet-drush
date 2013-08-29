@@ -5,6 +5,14 @@ class drush::git::drush (
   $update     = false
   ) inherits drush::defaults {
 
+  if !defined(Package['git']) and !defined(Package['git-core']) {
+    package { 'git': ensure => present }
+  }
+
+  if !defined(Package['php5-cli']) {
+    package { 'php5-cli': ensure => present }
+  }
+
   drush::git { $git_repo :
     path       => '/usr/share',
     git_branch => $git_branch,
