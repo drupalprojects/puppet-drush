@@ -11,9 +11,13 @@ define drush::dl (
   if $arguments { $real_args = $arguments }
   else { $real_args = "${name}" }
 
+  # Always download drush extensions without a site alias.
+  if $type == 'extension' { $real_alias = '@none' }
+  else { $real_alias = "${site_alias}" }
+
   drush::run {"drush-dl:${name}":
     command    => 'pm-download',
-    site_alias => $site_alias,
+    site_alias => $real_alias,
     options    => $options,
     arguments  => $real_args,
     drush_user => $drush_user,
