@@ -2,7 +2,7 @@ class drush::defaults {
 
   $drush_user = 'root'
   $drush_home = '/root'
-  $site_alias = ''
+  $site_alias = '@none'
   $options    = ''
   $arguments  = ''
   $api        = 5
