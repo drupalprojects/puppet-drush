@@ -32,7 +32,10 @@ class drush::git::drush (
   exec {'first drush run':
     command     => '/usr/bin/drush status',
     refreshonly => true,
-    require     => File['symlink drush'],
+    require     => [
+      File['symlink drush'],
+      Package['php5-cli'],
+    ],
   }
 
 }
