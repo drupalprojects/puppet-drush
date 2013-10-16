@@ -30,7 +30,7 @@ class drush::git::drush (
 
   # Needed to download a Pear library
   exec {'first drush run':
-    command     => '/usr/bin/drush status',
+    command     => '/usr/bin/drush cache-clear drush',
     refreshonly => true,
     require     => [
       File['symlink drush'],
