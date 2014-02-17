@@ -52,7 +52,7 @@ define drush::git (
     exec {"drush-update-repo:${name}":
       command => 'git pull -r',
       cwd     => $real_path,
-      paths   => $paths,
+      path    => $paths,
       require => Exec["drush-clone-repo:${name}"],
     }
   }
