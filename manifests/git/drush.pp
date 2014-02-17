@@ -5,12 +5,14 @@ class drush::git::drush (
   $update     = false
   ) inherits drush::defaults {
 
+  Exec { path    => ['/bin', '/usr/bin', '/usr/local/bin', '/usr/share'], }
+
   if !defined(Package['git']) and !defined(Package['git-core']) {
-    package { 'git': ensure => present }
+    package { 'git': ensure => present, before => Drush::Git[$git_repo]}
   }
 
   if !defined(Package['php5-cli']) {
-    package { 'php5-cli': ensure => present }
+    package { 'php5-cli': ensure => present, }
   }
 
   drush::git { $git_repo :
@@ -28,13 +30,30 @@ class drush::git::drush (
     notify  => Exec['first drush run'],
   }
 
+  exec {'Install composer' :
+    command => 'curl -sS https://getcomposer.org/installer | php',
+    require => Package['php5-cli'],
+  }
+
+  exec {'Make Composer globally executable' :
+    command => 'mv composer.phar /usr/local/bin/composer',
+    require => Exec['Install composer'],
+    before  => Exec['Install Drush dependencies'],
+  }
+
+  exec {'Install Drush dependencies' :
+    command => 'composer install',
+    cwd     => '/usr/share/drush',
+  }
+
   # Needed to download a Pear library
   exec {'first drush run':
-    command     => '/usr/bin/drush cache-clear drush',
+    command     => 'drush cache-clear drush',
     refreshonly => true,
     require     => [
       File['symlink drush'],
       Package['php5-cli'],
+      Exec['Install Drush dependencies'],
     ],
   }
 
