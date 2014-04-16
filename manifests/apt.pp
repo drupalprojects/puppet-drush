@@ -1,5 +1,7 @@
 class drush::apt ( $dist = false, $backports = false) {
 
+  include drush::apt::update
+
   if $backports {
     file { "/etc/apt/preferences.d/drush-${backports}.pref":
       ensure  => 'present',
@@ -32,18 +34,6 @@ class drush::apt ( $dist = false, $backports = false) {
       notify  => Exec['drush_update_apt'],
       before  => Exec['drush_apt_update'],
     }
-  }
-
-  exec { 'drush_update_apt':
-    command     => 'apt-get update & sleep 1',
-    path        => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ],
-    refreshonly => true,
-  }
-
-  exec { 'drush_apt_update':
-    command  => 'apt-get update && /usr/bin/apt-get autoclean',
-    path     => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ],
-    schedule => daily,
   }
 
 }
