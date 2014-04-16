@@ -32,18 +32,17 @@ class drush::git::drush (
 
   exec {'Install composer' :
     command => 'curl -sS https://getcomposer.org/installer | php',
+    cwd     => '/usr/share/drush',
+    creates => '/usr/share/drush/composer.phar',
+    notify  => Exec['Install Drush dependencies'],
     require => Package['php5-cli'],
   }
 
-  exec {'Make Composer globally executable' :
-    command => 'mv composer.phar /usr/local/bin/composer',
-    require => Exec['Install composer'],
-    before  => Exec['Install Drush dependencies'],
-  }
-
   exec {'Install Drush dependencies' :
-    command => 'composer install',
-    cwd     => '/usr/share/drush',
+    command     => 'php ./composer.phar install > composer.log',
+    cwd         => '/usr/share/drush',
+    refreshonly => true,
+    require     => Exec['Install composer'],
   }
 
   # Needed to download a Pear library
