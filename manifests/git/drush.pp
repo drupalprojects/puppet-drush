@@ -51,6 +51,7 @@ class drush::git::drush (
     cwd     => '/usr/share/drush',
     creates => '/usr/share/drush/composer.phar',
     notify  => Exec['Install Drush dependencies'],
+    refreshonly => true,
     require => Package['php5-cli', 'curl'],
   }
 
