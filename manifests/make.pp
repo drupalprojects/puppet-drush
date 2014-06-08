@@ -14,6 +14,7 @@ define drush::make (
 
   drush::run {"drush-make:${name}":
     command    => 'make',
+    site_alias => '@none',
     creates    => $make_path,
     options    => $options,
     arguments  => $arguments,
