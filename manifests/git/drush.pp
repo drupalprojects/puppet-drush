@@ -49,6 +49,7 @@ class drush::git::drush (
   exec {'Install composer' :
     command => 'curl -sS https://getcomposer.org/installer | php',
     cwd     => '/usr/share/drush',
+    environment => 'COMPOSER_HOME=/root',
     creates => '/usr/share/drush/composer.phar',
     notify  => Exec['Install Drush dependencies'],
     require => Package['php5-cli', 'curl'],
